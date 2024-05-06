@@ -1,0 +1,10 @@
+<!ELEMENT tasklist (simpleTask|complexTask)*>
+<!ELEMENT simpleTask EMPTY>
+<!ATTLIST simpleTask
+    description CDATA #REQUIRED
+    dueDate CDATA #REQUIRED
+    priority CDATA #REQUIRED
+    estimatedDate CDATA #REQUIRED
+    progress CDATA #REQUIRED>
+<!ELEMENT complexTask (simpleTask|complexTask)*>
+<!ATTLIST complexTask priority CDATA #REQUIRED>

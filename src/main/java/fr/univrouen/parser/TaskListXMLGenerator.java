@@ -5,16 +5,15 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 import org.xml.sax.helpers.DefaultHandler;
 
-import taskManager.ComplexTask;
-import taskManager.SimpleTask;
-import taskManager.TaskComponent;
-import tasklist.TaskList;
+import fr.univrouen.task.*;
+import fr.univrouen.tasklistObserver.TaskList;
 
 import java.io.FileOutputStream;
 
 public class TaskListXMLGenerator {
 
-    public void generateXML(TaskList taskList, String fileName) {
+    public boolean generateXML(TaskList taskList, String fileName) {
+        boolean result = true;
         try {
             FileOutputStream outputStream = new FileOutputStream(fileName);
 
@@ -35,15 +34,16 @@ public class TaskListXMLGenerator {
             // Fermer le flux de sortie
             outputStream.close();
 
-            System.out.println("Fichier XML généré avec succès.");
+            //Fichier XML généré avec succès.
         } catch (Exception e) {
             e.printStackTrace();
+            result = false;
         }
+        return result;
     }
 
     private static void writeTaskComponent(XMLHandler handler, TaskComponent taskComponent) throws SAXException {
-        if (taskComponent instanceof SimpleTask) {
-            SimpleTask simpleTask = (SimpleTask) taskComponent;
+        if (taskComponent instanceof SimpleTask simpleTask) {
             AttributesImpl attributes = new AttributesImpl();
             attributes.addAttribute("", "description", "description", "CDATA", simpleTask.getDescription());
             attributes.addAttribute("", "dueDate", "dueDate", "CDATA", simpleTask.getDueDate().toString());
@@ -54,8 +54,7 @@ public class TaskListXMLGenerator {
 
             handler.startElement("", "simpleTask", "simpleTask", attributes);
             // handler.endElement("", "simpleTask", "simpleTask");
-        } else if (taskComponent instanceof ComplexTask) {
-            ComplexTask complexTask = (ComplexTask) taskComponent;
+        } else if (taskComponent instanceof ComplexTask complexTask) {
             AttributesImpl attributes = new AttributesImpl();
             attributes.addAttribute("", "priority", "priority", "CDATA", complexTask.getPriority().toString());
 

@@ -1,4 +1,6 @@
-package fr.univrouen.tasklist;
+package fr.univrouen.tasklistFactory;
+
+import fr.univrouen.tasklistObserver.TaskList;
 
 public class NewTaskListFactory implements TaskListFactory {
         @Override

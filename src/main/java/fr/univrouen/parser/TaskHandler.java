@@ -3,10 +3,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import taskManager.ComplexTask;
-import taskManager.Priority;
-import taskManager.SimpleTask;
-import taskManager.TaskComponent;
+import fr.univrouen.task.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
