@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tasklist>
+<simpleTask description="Faire les courses" dueDate="2024-05-01" priority="URGENT" estimatedDate="1" progress="1.0"/>
+</simpleTask><complexTask priority="NORMAL">
+<simpleTask description="Rédiger le rapport" dueDate="2024-05-05" priority="NORMAL" estimatedDate="3" progress="1.0"/>
+</simpleTask><complexTask priority="URGENT">
+<simpleTask description="Finaliser la conception" dueDate="2024-05-03" priority="URGENT" estimatedDate="2" progress="1.0"/>
+</simpleTask><simpleTask description="Coder l'éditeur" dueDate="2024-05-04" priority="URGENT" estimatedDate="4" progress="1.0"/>
+</simpleTask></complexTask></complexTask><simpleTask description="Préparer la soutenance" dueDate="2024-05-06" priority="NORMAL" estimatedDate="2" progress="1.0"/>
+</simpleTask><simpleTask description="Faire les courses" dueDate="2024-05-07" priority="URGENT" estimatedDate="1" progress="0.0"/>
+</simpleTask><complexTask priority="NORMAL">
+<simpleTask description="Rédiger le compte-rendu" dueDate="2024-05-08" priority="NORMAL" estimatedDate="2" progress="1.0"/>
+</simpleTask><simpleTask description="Finaliser la présentation" dueDate="2024-05-09" priority="NORMAL" estimatedDate="3" progress="1.0"/>
+</simpleTask></complexTask><simpleTask description="Test visitor" dueDate="2024-05-10" priority="URGENT" estimatedDate="2" progress="0.0"/>
+</simpleTask>
+</tasklist>

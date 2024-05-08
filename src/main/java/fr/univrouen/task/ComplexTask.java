@@ -1,5 +1,7 @@
 package fr.univrouen.task;
 
+import fr.univrouen.visitor.TaskVisitor;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,5 +102,11 @@ public class ComplexTask implements TaskComponent {
 	public TaskComponent getSubTask(int id) {
 		return subTasks.get(id);
 	}
+
+	@Override
+	public void accept(TaskVisitor visitor) {
+		visitor.visit(this);
+	}
+
 
 }

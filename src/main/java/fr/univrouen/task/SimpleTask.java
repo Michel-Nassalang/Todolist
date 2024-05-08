@@ -1,5 +1,7 @@
 package fr.univrouen.task;
 
+import fr.univrouen.visitor.TaskVisitor;
+
 import java.time.LocalDate;
 
 public class SimpleTask implements TaskComponent {
@@ -59,8 +61,14 @@ public class SimpleTask implements TaskComponent {
 		return (progress)? 1 : 0;
 	}
 
+
 	public void setProgress(float progress) {
 		this.progress = (progress != 0);
+	}
+
+	@Override
+	public void accept(TaskVisitor visitor) {
+		visitor.visit(this);
 	}
 	
 }

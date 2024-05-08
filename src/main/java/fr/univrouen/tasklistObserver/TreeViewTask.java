@@ -3,6 +3,7 @@ package fr.univrouen.tasklistObserver;
 import fr.univrouen.task.ComplexTask;
 import fr.univrouen.task.Priority;
 import fr.univrouen.task.TaskComponent;
+import fr.univrouen.visitor.TaskToTree;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.TreeItem;
@@ -75,26 +76,6 @@ public class TreeViewTask implements TaskListObserver {
         return progressColumn;
     }
 
-
-    private void addComplexTaskToTree(ComplexTask complexTask, TreeItem<TaskComponent> parent) {
-        TreeItem<TaskComponent> taskItem = new TreeItem<>(complexTask);
-        parent.getChildren().add(taskItem);
-        for (TaskComponent subTask : complexTask.getSubTasks()) {
-            if (subTask instanceof ComplexTask) {
-                // Si la sous-tâche est une ComplexTask, récursivement ajouter son arborescence
-                addComplexTaskToTree((ComplexTask) subTask, taskItem);
-            } else {
-                // Si la sous-tâche est une SimpleTask, ajouter à l'arborescence de la ComplexTask
-                addSimpleTaskToTree(subTask, taskItem);
-            }
-        }
-    }
-
-    private void addSimpleTaskToTree(TaskComponent simpleTask, TreeItem<TaskComponent> parent) {
-        TreeItem<TaskComponent> taskItem = new TreeItem<>(simpleTask);
-        parent.getChildren().add(taskItem);
-    }
-
     public TreeTableView<TaskComponent> getTreeTableView(){
         return treeTableView;
     }
@@ -113,12 +94,9 @@ public class TreeViewTask implements TaskListObserver {
         // Effacer les anciennes tâches
         root.getChildren().clear();
         // Ajouter les nouvelles tâches
+        TaskToTree visitor = new TaskToTree(root);
         for (TaskComponent task : tasks) {
-            if (task instanceof ComplexTask) {
-                addComplexTaskToTree((ComplexTask) task, root);
-            } else {
-                addSimpleTaskToTree(task, root);
-            }
+            task.accept(visitor);
         }
     }
 }

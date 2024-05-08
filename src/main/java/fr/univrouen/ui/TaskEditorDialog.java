@@ -4,6 +4,8 @@ import fr.univrouen.task.ComplexTask;
 import fr.univrouen.task.Priority;
 import fr.univrouen.task.SimpleTask;
 import fr.univrouen.task.TaskComponent;
+import fr.univrouen.visitor.TaskFieldPopulator;
+import fr.univrouen.visitor.TaskVisitor;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.ColumnConstraints;
@@ -175,19 +177,10 @@ public class TaskEditorDialog {
         });
 
         if (task != null) {
-            if (task instanceof SimpleTask simpleTask) {
-                descriptionField.setText(simpleTask.getDescription());
-                dueDateField.setValue(simpleTask.getDueDate());
-                estimatedDurationField.setText(String.valueOf(simpleTask.getEstimatedDate()));
-                priorityChoiceBox.setValue(simpleTask.getPriority());
-                stateprogress.setValue((simpleTask.getProgress() == 1) ? "Réalisé" : "Non réalisé");
-                taskTypeChoiceBox.setValue("Tache simple");
-            } else if (task instanceof ComplexTask complexTask) {
-                subTasksCountField.setText(String.valueOf(complexTask.getSubTasks().size()));
-                priorityChoiceBox.setValue(complexTask.getPriority());
-                taskTypeChoiceBox.setValue("Tache complexe");
-            }
+            TaskFieldPopulator fieldSetter = new TaskFieldPopulator(descriptionField, dueDateField, estimatedDurationField, priorityChoiceBox, stateprogress, subTasksCountField, taskTypeChoiceBox);
+            task.accept(fieldSetter);
         }
         return dialog;
     }
+
 }

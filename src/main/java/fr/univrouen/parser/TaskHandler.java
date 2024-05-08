@@ -1,4 +1,5 @@
 package fr.univrouen.parser;
+import fr.univrouen.visitor.TaskAttributePopulator;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
@@ -105,16 +106,7 @@ public class TaskHandler extends DefaultHandler {
     }
 
     private void populateTaskFromAttributes(TaskComponent task, Attributes attributes) {
-        if (task instanceof SimpleTask) {
-            SimpleTask simpleTask = (SimpleTask) task;
-            simpleTask.setDescription(attributes.getValue("description"));
-            simpleTask.setDueDate(LocalDate.parse(attributes.getValue("dueDate")));
-            simpleTask.setPriority(Priority.valueOf(attributes.getValue("priority").toUpperCase()));
-            simpleTask.setEstimatedDate(Integer.parseInt(attributes.getValue("estimatedDate")));
-            simpleTask.setProgress(Float.parseFloat(attributes.getValue("progress")));
-        } else if (task instanceof ComplexTask) {
-            ComplexTask complexTask = (ComplexTask) task;
-            complexTask.setPriority(Priority.valueOf(attributes.getValue("priority").toUpperCase()));
-        }
+        TaskAttributePopulator attributePopulator = new TaskAttributePopulator(attributes);
+        task.accept(attributePopulator);
     }
 }

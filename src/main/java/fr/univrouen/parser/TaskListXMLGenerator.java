@@ -1,5 +1,6 @@
 package fr.univrouen.parser;
 
+import fr.univrouen.visitor.TaskAttributeWriter;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
@@ -43,30 +44,11 @@ public class TaskListXMLGenerator {
     }
 
     private static void writeTaskComponent(XMLHandler handler, TaskComponent taskComponent) throws SAXException {
-        if (taskComponent instanceof SimpleTask simpleTask) {
-            AttributesImpl attributes = new AttributesImpl();
-            attributes.addAttribute("", "description", "description", "CDATA", simpleTask.getDescription());
-            attributes.addAttribute("", "dueDate", "dueDate", "CDATA", simpleTask.getDueDate().toString());
-            attributes.addAttribute("", "priority", "priority", "CDATA", simpleTask.getPriority().toString());
-            attributes.addAttribute("", "estimatedDate", "estimatedDate", "CDATA",
-                    simpleTask.getEstimatedDate().toString());
-            attributes.addAttribute("", "progress", "progress", "CDATA", Float.toString(simpleTask.getProgress()));
-
-            handler.startElement("", "simpleTask", "simpleTask", attributes);
-            // handler.endElement("", "simpleTask", "simpleTask");
-        } else if (taskComponent instanceof ComplexTask complexTask) {
-            AttributesImpl attributes = new AttributesImpl();
-            attributes.addAttribute("", "priority", "priority", "CDATA", complexTask.getPriority().toString());
-
-            handler.startElement("", "complexTask", "complexTask", attributes);
-            for (TaskComponent subTask : complexTask.getSubTasks()) {
-                writeTaskComponent(handler, subTask);
-            }
-            handler.endElement("", "complexTask", "complexTask");
-        }
+        TaskAttributeWriter taskAttributeWriter = new TaskAttributeWriter(handler);
+        taskComponent.accept(taskAttributeWriter);
     }
 
-    static class XMLHandler extends DefaultHandler {
+    public static class XMLHandler extends DefaultHandler {
         private FileOutputStream outputStream;
 
         public XMLHandler(FileOutputStream outputStream) {
