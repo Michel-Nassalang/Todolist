@@ -4,8 +4,7 @@ import fr.univrouen.analyzer.TaskAnalyzer;
 import fr.univrouen.task.TaskComponent;
 import fr.univrouen.tasklistObserver.TreeViewTask;
 import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -26,7 +25,7 @@ public class AnalyzeBox {
         Button orderButton = new Button("Ordonner");
 
         analyzeButtons.getChildren().addAll(loadButton, incompleteButton, orderButton);
-
+        treeViewTask.getRoot().getChildren().clear();
         loadButton.setOnAction(event -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Lecture de liste de taches");
@@ -35,9 +34,7 @@ public class AnalyzeBox {
                 String filename = selectedFile.getAbsolutePath();
                 if(!filename.isEmpty()){
                     boolean inLoaded = taskAnalyzer.loadFromFile(filename, treeViewTask);
-                    if (inLoaded) {
-                        AlertUI.showAlert(Alert.AlertType.INFORMATION, "Succès", "Lecture de liste de tâches avec succès");
-                    } else {
+                    if (!inLoaded) {
                         AlertUI.showAlert(Alert.AlertType.ERROR, "Erreur", "Sauvegarde echouée");
                     }
                 }
@@ -46,8 +43,12 @@ public class AnalyzeBox {
 
         incompleteButton.setOnAction(event -> {
             List<TaskComponent> incompleteTasks = taskAnalyzer.getTop5IncompleteTasks();
-            if (incompleteTasks != null) {
-                AlertUI.showAlert(Alert.AlertType.INFORMATION, "Succès", "Recupération de la liste des 5 tâches, non complétées, dont les dates d’échéance sont les plus faibles");
+            if (incompleteTasks != null && !incompleteTasks.isEmpty()) {
+                //Création du dialog pour afficher les taches incomplètes
+                Dialog<Void> dialog = TaskAnalyzerDialog.createTasksDialog(incompleteTasks);
+                dialog.setTitle("Tâches incomplètes");
+                dialog.setHeaderText("Liste des 5 tâches incomplètes avec les dates d'échéance les plus proches :");
+                dialog.showAndWait();
             } else {
                 AlertUI.showAlert(Alert.AlertType.ERROR, "Erreur", "Liste vide");
             }
@@ -56,7 +57,11 @@ public class AnalyzeBox {
         orderButton.setOnAction(event -> {
             List<TaskComponent> orderTasks = taskAnalyzer.orderTaskList();
             if (orderTasks != null) {
-                AlertUI.showAlert(Alert.AlertType.INFORMATION, "Succès", "Ordonnancement des taches de la liste");
+                //Création du dialog pour l'affichage des taches ordonées
+                Dialog<Void> dialog = TaskAnalyzerDialog.createTasksDialog(orderTasks);
+                dialog.setTitle("Tâches ordonnées");
+                dialog.setHeaderText("Liste des tâches ordonnées par ordre croissant de date :");
+                dialog.showAndWait();
             } else {
                 AlertUI.showAlert(Alert.AlertType.ERROR, "Erreur", "Liste vide");
             }

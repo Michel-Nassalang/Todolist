@@ -28,7 +28,7 @@ public class FileTaskListFactory implements TaskListFactory {
             return handler.getTasks();
         } catch (Exception e) {
             // Gestion des erreurs
-            // System.out.println(e);
+             System.out.println(e);
             return null;
         }
     }

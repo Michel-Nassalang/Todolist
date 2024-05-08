@@ -56,11 +56,11 @@ public class SimpleTask implements TaskComponent {
 
 	@Override
 	public float getProgress(){
-		return (progress == true)? 1 : 0;
+		return (progress)? 1 : 0;
 	}
 
 	public void setProgress(float progress) {
-		this.progress = (progress==0 ? false : true );
+		this.progress = (progress != 0);
 	}
 	
 }

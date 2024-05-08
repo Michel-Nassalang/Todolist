@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tasklist>
+<complexTask priority="URGENT">
+<simpleTask description="Tester l'application" dueDate="2024-05-08" priority="URGENT" estimatedDate="2" progress="0.0"/>
+<complexTask priority="NORMAL">
+<simpleTask description="debugger l'editeur" dueDate="2024-05-07" priority="NORMAL" estimatedDate="3" progress="0.0"/>
+<simpleTask description="Respecter les patrons" dueDate="2024-05-06" priority="URGENT" estimatedDate="1" progress="0.0"/>
+</complexTask></complexTask>
+</tasklist>

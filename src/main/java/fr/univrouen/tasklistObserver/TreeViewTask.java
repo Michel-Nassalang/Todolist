@@ -1,12 +1,16 @@
 package fr.univrouen.tasklistObserver;
 
 import fr.univrouen.task.ComplexTask;
+import fr.univrouen.task.Priority;
 import fr.univrouen.task.TaskComponent;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class TreeViewTask implements TaskListObserver {
@@ -15,13 +19,60 @@ public class TreeViewTask implements TaskListObserver {
     private TreeItem<TaskComponent> root;
 
     public TreeViewTask(){
-        TreeTableColumn<TaskComponent, String> column = new TreeTableColumn<>("Liste de taches");
-        column.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getDescription()));
 
-        treeTableView.getColumns().add(column);
+        // Colonne pour la description de la tâche
+        TreeTableColumn<TaskComponent, String> descriptionColumn = new TreeTableColumn<>("Description");
+        descriptionColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getValue().getDescription()));
+
+        // Colonne pour la date d'échéance de la tâche
+        TreeTableColumn<TaskComponent, LocalDate> dueDateColumn = new TreeTableColumn<>("Date d'échéance");
+        dueDateColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getDueDate()));
+
+        // Colonne pour la durée estimée de la tâche
+        TreeTableColumn<TaskComponent, Integer> estimatedDurationColumn = new TreeTableColumn<>("Durée estimée");
+        estimatedDurationColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getEstimatedDate()));
+
+        // Colonne pour la priorité de la tâche
+        TreeTableColumn<TaskComponent, Priority> priorityColumn = new TreeTableColumn<>("Priorité");
+        priorityColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getPriority()));
+
+        TreeTableColumn<TaskComponent, Float> progressColumn = getTaskComponentFloatTreeTableColumn();
+
+        // Définir la largeur préférée de la colonne en pixels
+        descriptionColumn.setPrefWidth(290);
+
+
+        treeTableView.getColumns().add(descriptionColumn);
+        treeTableView.getColumns().add(dueDateColumn);
+        treeTableView.getColumns().add(estimatedDurationColumn);
+        treeTableView.getColumns().add(priorityColumn);
+        treeTableView.getColumns().add(progressColumn);
+
         root = new TreeItem<>();
         treeTableView.setRoot(root);
         treeTableView.setShowRoot(false);
+    }
+
+    private TreeTableColumn<TaskComponent, Float> getTaskComponentFloatTreeTableColumn() {
+        TreeTableColumn<TaskComponent, Float> progressColumn = new TreeTableColumn<>("Progression");
+        progressColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getValue().getProgress()));
+
+        // Définission CellFactory pour personnaliser l'affichage de la progression
+        progressColumn.setCellFactory(column -> {
+            return new TreeTableCell<TaskComponent, Float>() {
+                @Override
+                protected void updateItem(Float progress, boolean empty) {
+                    super.updateItem(progress, empty);
+                    if (empty || progress == null) {
+                        setText(null);
+                    } else {
+                        // Affichez la progression sous forme de pourcentage
+                        setText(String.format("%.0f%%", progress * 100));
+                    }
+                }
+            };
+        });
+        return progressColumn;
     }
 
 

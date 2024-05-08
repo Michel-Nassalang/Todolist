@@ -4,11 +4,7 @@ import fr.univrouen.editor.TaskEditor;
 import fr.univrouen.task.TaskComponent;
 import fr.univrouen.tasklistObserver.TreeViewTask;
 import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -19,7 +15,6 @@ import java.util.Optional;
 
     public class EditBox {
 
-        TaskEditor taskEditor;
         private final VBox buttonBox;
 
         public EditBox(TaskEditor taskEditor, TreeViewTask treeViewTask, Stage stage) {
@@ -34,7 +29,7 @@ import java.util.Optional;
             Button loadButton = new Button("Charger");
 
             buttonBox.getChildren().addAll(createTaskList, addTaskButton, removeTaskButton, modifyButton, saveButton, loadButton);
-
+            treeViewTask.getRoot().getChildren().clear();
             TreeTableView<TaskComponent> treeTableView = treeViewTask.getTreeTableView();
             TreeItem<TaskComponent> root = treeViewTask.getRoot();
 
@@ -49,7 +44,7 @@ import java.util.Optional;
             });
 
             addTaskButton.setOnAction(event -> {
-                TaskInputDialog inputDialog = new TaskInputDialog();
+                Dialog<TaskComponent> inputDialog = TaskEditorDialog.createTaskDialog(null);
                 Optional<TaskComponent> result = inputDialog.showAndWait();
                 result.ifPresent(task -> {
                     boolean success = taskEditor.addTask(task);
@@ -92,7 +87,7 @@ import java.util.Optional;
                     AlertUI.showAlert(Alert.AlertType.WARNING, "Avertissement", "Selectionner la tache à modifier");
                 } else {
                     TaskComponent selectedTask = selectedItem.getValue();
-                    TaskInputDialog inputDialog = new TaskInputDialog(selectedTask);
+                    Dialog<TaskComponent> inputDialog = new TaskEditorDialog().createTaskDialog(selectedTask);
                     Optional<TaskComponent> result = inputDialog.showAndWait();
                     result.ifPresent(modifiedTask -> {
                         boolean success = taskEditor.modifyTask(selectedTask, modifiedTask);
@@ -131,9 +126,7 @@ import java.util.Optional;
                     String filename = selectedFile.getAbsolutePath();
                     if (!filename.isEmpty()) {
                         boolean inLoaded = taskEditor.loadFromFile(selectedFile.getAbsolutePath(), treeViewTask);
-                        if (inLoaded) {
-                            AlertUI.showAlert(Alert.AlertType.INFORMATION, "Succès", "Chargement de liste de tâches avec succès");
-                        } else {
+                        if (!inLoaded) {
                             AlertUI.showAlert(Alert.AlertType.ERROR, "Erreur", "Chargement echoué");
                         }
                     }

@@ -40,6 +40,13 @@ public class TaskAnalyzer {
         return taskList != null;
     }
 
+
+    public TaskList loadFromFile(String filename){
+        TaskListFactory taskListFactory = new FileTaskListFactory(filename);
+        setTaskList(taskListFactory.createTaskList());
+        return taskList;
+    }
+
     public List<TaskComponent> getTop5IncompleteTasks() {
         if(taskList != null && taskList.getAllTasks() != null){
             List<TaskComponent> top5 = taskList.getAllTasks().stream()
