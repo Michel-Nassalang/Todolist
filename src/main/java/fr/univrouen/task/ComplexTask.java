@@ -1,6 +1,6 @@
 package fr.univrouen.task;
 
-import fr.univrouen.visitor.TaskVisitor;
+import fr.univrouen.taskVisitor.TaskVisitor;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

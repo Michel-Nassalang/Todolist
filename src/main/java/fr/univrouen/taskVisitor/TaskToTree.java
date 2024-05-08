@@ -1,4 +1,4 @@
-package fr.univrouen.visitor;
+package fr.univrouen.taskVisitor;
 
 import fr.univrouen.task.ComplexTask;
 import fr.univrouen.task.SimpleTask;
@@ -24,7 +24,7 @@ public class TaskToTree implements TaskVisitor {
         TreeItem<TaskComponent> taskItem = new TreeItem<>(task);
         parent.getChildren().add(taskItem);
         for (TaskComponent subTask : task.getSubTasks()) {
-//            subTask.accept(this); // Appel récursif pour traiter les sous-tâches
+//            Appel récursif pour traiter les sous-tâches
             TaskToTree taskToTree = new TaskToTree(taskItem);
             subTask.accept(taskToTree);
         }

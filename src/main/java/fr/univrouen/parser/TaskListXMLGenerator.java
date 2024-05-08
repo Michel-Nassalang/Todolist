@@ -1,9 +1,8 @@
 package fr.univrouen.parser;
 
-import fr.univrouen.visitor.TaskAttributeWriter;
+import fr.univrouen.taskVisitor.TaskAttributeWriter;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.AttributesImpl;
 import org.xml.sax.helpers.DefaultHandler;
 
 import fr.univrouen.task.*;

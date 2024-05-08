@@ -1,4 +1,4 @@
-package fr.univrouen.visitor;
+package fr.univrouen.taskVisitor;
 
 import fr.univrouen.task.*;
 import fr.univrouen.task.Priority;

@@ -1,7 +1,6 @@
-package fr.univrouen.visitor;
+package fr.univrouen.taskVisitor;
 
 import fr.univrouen.task.*;
-import org.xml.sax.SAXException;
 
 public interface TaskVisitor {
     void visit(SimpleTask task);

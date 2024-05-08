@@ -1,9 +1,8 @@
 package fr.univrouen.tasklistObserver;
 
-import fr.univrouen.task.ComplexTask;
 import fr.univrouen.task.Priority;
 import fr.univrouen.task.TaskComponent;
-import fr.univrouen.visitor.TaskToTree;
+import fr.univrouen.taskVisitor.TaskToTree;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.TreeItem;

@@ -6,7 +6,7 @@ import fr.univrouen.tasklistObserver.TaskList;
 import java.util.List;
 import java.util.Scanner;
 
-public class TaskAnalyzerCmd {
+public class Tsktop {
     public static void printask(TaskComponent task){
          System.out.println(
                  "Description: " + task.getDescription() +
