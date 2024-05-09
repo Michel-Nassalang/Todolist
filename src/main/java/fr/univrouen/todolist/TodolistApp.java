@@ -15,13 +15,21 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+/**
+ * L'application TodolistApp est une application JavaFX pour gérer les tâches à l'aide d'un éditeur et d'un analyseur.
+ */
 public class TodolistApp extends Application {
 
     private TaskEditor taskEditor = TaskEditor.getInstance();
     private TaskAnalyzer taskAnalyzer = TaskAnalyzer.getInstance();
     private BorderPane mainPane;
 
+    /**
+     * Méthode principale pour démarrer l'application JavaFX.
+     *
+     * @param stage la fenêtre principale de l'application.
+     * @throws IOException en cas d'erreur d'entrée/sortie.
+     */
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -67,6 +75,11 @@ public class TodolistApp extends Application {
         stage.show();
     }
 
+    /**
+     * Méthode principale pour lancer l'application.
+     *
+     * @param args les arguments de la ligne de commande (non utilisés dans cette application).
+     */
     public static void main(String[] args) {
         launch();
     }

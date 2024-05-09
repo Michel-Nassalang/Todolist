@@ -1,0 +1,10 @@
+module:fr.univrouen.todolist
+fr.univrouen.analyzer
+fr.univrouen.editor
+fr.univrouen.parser
+fr.univrouen.task
+fr.univrouen.tasklistFactory
+fr.univrouen.tasklistObserver
+fr.univrouen.taskVisitor
+fr.univrouen.todolist
+fr.univrouen.ui

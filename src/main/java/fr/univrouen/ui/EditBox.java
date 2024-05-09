@@ -12,11 +12,21 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.Optional;
 
-
-    public class EditBox {
+/**
+ * La classe EditBox est responsable de la création des boutons et de la gestion des événements associés
+ * pour l'édition des tâches.
+ */
+public class EditBox {
 
         private final VBox buttonBox;
 
+    /**
+     * Constructeur de la classe EditBox.
+     *
+     * @param taskEditor   l'instance de TaskEditor pour l'édition des tâches.
+     * @param treeViewTask l'instance de TreeViewTask pour afficher les tâches dans l'interface utilisateur.
+     * @param stage        l'instance de Stage pour la fenêtre de l'application.
+     */
         public EditBox(TaskEditor taskEditor, TreeViewTask treeViewTask, Stage stage) {
             buttonBox = new VBox();
             buttonBox.setSpacing(10);
@@ -135,6 +145,11 @@ import java.util.Optional;
 
         }
 
+    /**
+     * Renvoie la VBox contenant les boutons d'édition.
+     *
+     * @return la VBox contenant les boutons d'édition.
+     */
         public VBox getButtonBox() {
             return buttonBox;
         }

@@ -14,7 +14,17 @@ import javafx.scene.layout.VBox;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * La classe TaskAnalyzerDialog est responsable de la création d'une boîte de dialogue pour afficher les tâches
+ * incomplètes.
+ */
 public class TaskAnalyzerDialog {
+    /**
+     * Crée une boîte de dialogue pour afficher les tâches incomplètes.
+     *
+     * @param incompleteTasks la liste des tâches incomplètes à afficher dans la boîte de dialogue.
+     * @return le dialogue créé pour afficher les tâches incomplètes.
+     */
     public static Dialog<Void> createTasksDialog(List<TaskComponent> incompleteTasks) {
         // Créer un TreeTableView pour afficher les tâches incomplètes
         TreeTableView<TaskComponent> treeTableView = new TreeTableView<>();

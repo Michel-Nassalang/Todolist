@@ -5,8 +5,16 @@ import fr.univrouen.tasklistObserver.TaskList;
 
 import java.util.List;
 import java.util.Scanner;
+/**
+ * La classe Tsktop est une interface en ligne de commande pour interagir avec l'analyseur de tâches.
+ */
+public class TaskAnalyzerApp {
 
-public class Tsktop {
+    /**
+     * Méthode pour afficher les détails d'une tâche.
+     *
+     * @param task la tâche dont les détails doivent être affichés.
+     */
     public static void printask(TaskComponent task){
          System.out.println(
                  "Description: " + task.getDescription() +
@@ -16,6 +24,12 @@ public class Tsktop {
                          ", Priorité: " + task.getPriority()
          );
     }
+
+    /**
+     * Méthode principale pour exécuter le programme.
+     *
+     * @param args les arguments de la ligne de commande (non utilisés dans cette application).
+     */
     public static void main(String[] args) {
         TaskAnalyzer taskAnalyzer = TaskAnalyzer.getInstance();
         Scanner scanner = new Scanner(System.in);

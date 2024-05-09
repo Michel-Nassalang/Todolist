@@ -10,8 +10,19 @@ import fr.univrouen.tasklistObserver.TaskList;
 
 import java.io.FileOutputStream;
 
+/**
+ * Cette classe génère un fichier XML à partir d'une liste de tâches.
+ * Elle utilise un gestionnaire d'événements SAX pour créer le XML à partir des objets TaskComponent.
+ */
 public class TaskListXMLGenerator {
 
+    /**
+     * Génère un fichier XML à partir d'une liste de tâches.
+     *
+     * @param taskList La liste de tâches à convertir en XML.
+     * @param fileName Le nom du fichier XML à générer.
+     * @return true si le fichier XML a été généré avec succès, false sinon.
+     */
     public boolean generateXML(TaskList taskList, String fileName) {
         boolean result = true;
         try {
@@ -47,9 +58,16 @@ public class TaskListXMLGenerator {
         taskComponent.accept(taskAttributeWriter);
     }
 
+    /**
+     * Classe implementant le DefaultHandler fournit par Sax pour gérer nos fichiers XML
+     */
     public static class XMLHandler extends DefaultHandler {
         private FileOutputStream outputStream;
 
+        /**
+         *
+         * @param outputStream Stream de sortie du fichier donné en paramètre
+         */
         public XMLHandler(FileOutputStream outputStream) {
             this.outputStream = outputStream;
         }

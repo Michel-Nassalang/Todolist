@@ -7,13 +7,27 @@ import fr.univrouen.task.TaskComponent;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.AttributesImpl;
 
+/**
+ * La classe TaskAttributeWriter est un visiteur chargé d'écrire les attributs d'une tâche
+ * dans un gestionnaire XMLHandler, pour la génération d'un fichier XML.
+ */
 public class TaskAttributeWriter implements TaskVisitor {
     private final TaskListXMLGenerator.XMLHandler handler;
 
+    /**
+     * Constructeur de la classe TaskAttributeWriter.
+     *
+     * @param handler le gestionnaire XMLHandler où écrire les attributs.
+     */
     public TaskAttributeWriter(TaskListXMLGenerator.XMLHandler handler) {
         this.handler = handler;
     }
 
+    /**
+     * Méthode pour visiter une SimpleTask et écrire ses attributs dans le XMLHandler.
+     *
+     * @param task la SimpleTask à écrire.
+     */
     @Override
     public void visit(SimpleTask task) {
         AttributesImpl attributes = new AttributesImpl();
@@ -25,12 +39,16 @@ public class TaskAttributeWriter implements TaskVisitor {
 
         try {
             handler.startElement("", "simpleTask", "simpleTask", attributes);
-            handler.endElement("", "simpleTask", "simpleTask");
         } catch (SAXException e) {
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * Méthode pour visiter une ComplexTask et écrire ses attributs dans le XMLHandler.
+     *
+     * @param task la ComplexTask à écrire.
+     */
     @Override
     public void visit(ComplexTask task) {
         AttributesImpl attributes = new AttributesImpl();

@@ -12,9 +12,20 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.List;
 
+/**
+ * La classe AnalyzeBox est responsable de la création des boutons et de la gestion des événements associés
+ * pour l'analyse des tâches.
+ */
 public class AnalyzeBox {
     private final VBox analyzeButtons;
 
+    /**
+     * Constructeur de la classe AnalyzeBox.
+     *
+     * @param taskAnalyzer l'instance de TaskAnalyzer pour l'analyse des tâches.
+     * @param treeViewTask l'instance de TreeViewTask pour afficher les tâches dans l'interface utilisateur.
+     * @param stage        l'instance de Stage pour la fenêtre de l'application.
+     */
     public AnalyzeBox(TaskAnalyzer taskAnalyzer, TreeViewTask treeViewTask, Stage stage) {
         analyzeButtons = new VBox();
         analyzeButtons.setSpacing(10);
@@ -69,6 +80,11 @@ public class AnalyzeBox {
 
     }
 
+    /**
+     * Renvoie la VBox contenant les boutons d'analyse.
+     *
+     * @return la VBox contenant les boutons d'analyse.
+     */
     public VBox getButtonBox() {
         return analyzeButtons;
     }

@@ -13,11 +13,20 @@ import javafx.scene.control.TreeTableView;
 import java.time.LocalDate;
 import java.util.List;
 
+/**
+ * La classe TreeViewTask est une implémentation de l'interface TaskListObserver
+ * qui affiche les tâches sous forme d'arborescence dans une interface utilisateur
+ * graphique JavaFX.
+ */
 public class TreeViewTask implements TaskListObserver {
 
     private TreeTableView<TaskComponent> treeTableView = new TreeTableView<>();
     private TreeItem<TaskComponent> root;
 
+    /**
+     * Constructeur de la classe TreeViewTask.
+     * Initialise les colonnes de l'arborescence et définit la racine.
+     */
     public TreeViewTask(){
 
         // Colonne pour la description de la tâche
@@ -75,19 +84,46 @@ public class TreeViewTask implements TaskListObserver {
         return progressColumn;
     }
 
+    /**
+     * Méthode pour obtenir la TableView de l'arborescence.
+     *
+     * @return la TreeTableView de l'arborescence.
+     */
     public TreeTableView<TaskComponent> getTreeTableView(){
         return treeTableView;
     }
+
+    /**
+     *
+     * @param treeTableView classe contenant les conteneurs des taches visuelles
+     */
     public void setTreeTableView(TreeTableView<TaskComponent> treeTableView){
         this.treeTableView = treeTableView;
     }
+
+    /**
+     * Méthode pour obtenir la racine de l'arborescence.
+     *
+     * @return la racine de l'arborescence.
+     */
     public TreeItem<TaskComponent> getRoot(){
         return root;
     }
+
+    /**
+     *
+     * @param root element central d'affichage des taches dans l'interface
+     */
     public void setRoot(TreeItem<TaskComponent> root){
         this.root = root;
     }
 
+    /**
+     * Méthode appelée lorsqu'il y a une mise à jour dans la liste de tâches.
+     * Efface les anciennes tâches et ajoute les nouvelles à l'arborescence.
+     *
+     * @param tasks la liste mise à jour des tâches.
+     */
     @Override
     public void update(List<TaskComponent> tasks) {
         // Effacer les anciennes tâches

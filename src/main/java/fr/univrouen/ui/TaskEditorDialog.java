@@ -17,7 +17,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * La classe TaskEditorDialog est responsable de la création d'une boîte de dialogue pour éditer les détails
+ * d'une tâche.
+ */
 public class TaskEditorDialog {
+
+    /**
+     * Crée une boîte de dialogue pour éditer les détails d'une tâche.
+     *
+     * @param task la tâche à éditer, ou null pour créer une nouvelle tâche.
+     * @return le dialogue créé pour éditer les détails de la tâche.
+     */
     public static Dialog<TaskComponent> createTaskDialog(TaskComponent task){
         Dialog<TaskComponent> dialog = new Dialog<>();
         ChoiceBox<String> taskTypeChoiceBox = new ChoiceBox<>();
