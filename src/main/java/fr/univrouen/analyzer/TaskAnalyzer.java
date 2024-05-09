@@ -89,9 +89,6 @@ public class TaskAnalyzer {
                     .sorted(Comparator.comparing(TaskComponent::getDueDate))
                     .limit(5)
                     .collect(Collectors.toList());
-            for (TaskComponent task : top5) {
-                System.out.println(task);
-            }
             return top5;
         }else {
             return null;
@@ -109,9 +106,6 @@ public class TaskAnalyzer {
                     .map(t -> (TaskComponent) t)
                     .sorted(Comparator.comparing(TaskComponent::getDueDate))
                     .collect(Collectors.toList());
-            for (TaskComponent task : orderTask) {
-                System.out.println(task);
-            }
             return orderTask;
         }else {
             return null;

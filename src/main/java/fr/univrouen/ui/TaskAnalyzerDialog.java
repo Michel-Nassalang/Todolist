@@ -50,7 +50,7 @@ public class TaskAnalyzerDialog {
 
         // Colonne pour la progression de la tâche
         TreeTableColumn<TaskComponent, String> progressColumn = new TreeTableColumn<>("Progression");
-        progressColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(String.valueOf(cellData.getValue().getValue().getProgress()*100)+"%"));
+        progressColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(String.valueOf(String.format("%.0f%%", cellData.getValue().getValue().getProgress()*100))));
 
         // Ajouter les colonnes au TreeTableView
         treeTableView.getColumns().addAll(descriptionColumn, dueDateColumn, estimatedDurationColumn, priorityColumn, progressColumn);

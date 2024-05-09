@@ -17,9 +17,9 @@ public class TaskAnalyzerApp {
      */
     public static void printask(TaskComponent task){
          System.out.println(
-                 "Description: " + task.getDescription() +
+                 "Tache -> Description: " + task.getDescription() +
                          ", Date d'échéance: " + task.getDueDate() +
-                         ", Progression: " + task.getProgress()* 100 + "%" +
+                         ", Progression: " + String.format("%.0f%%", task.getProgress() * 100) +
                          ", Durée d'estimation: " + task.getEstimatedDate() +
                          ", Priorité: " + task.getPriority()
          );
