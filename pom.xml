@@ -58,13 +58,13 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>fr.univrouen.todolist.TodolistApp</mainClass>
+                            <mainClass>fr.univrouen.analyzer.TaskAnalyzerApp</mainClass>
                         </manifest>
                     </archive>
+                    <finalName>tsk-top</finalName>
                 </configuration>
             </plugin>
+
 
             <plugin>
                 <groupId>org.openjfx</groupId>
@@ -72,7 +72,7 @@
                 <version>0.0.8</version>
                 <executions>
                     <execution>
-                        <!-- Default configuration for running with: mvn clean javafx:run -->
+                        <!-- Configuration par défaut pour lancer avec : mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>fr.univrouen.todolist/fr.univrouen.todolist.TodolistApp</mainClass>
@@ -84,8 +84,16 @@
                             <noHeaderFiles>true</noHeaderFiles>
                         </configuration>
                     </execution>
+                    <execution>
+                        <!-- Configuration pour lancer l'autre application JavaFX -->
+                        <id>tsk-edit</id>
+                        <configuration>
+                            <mainClass>fr.univrouen.editor.TaskEditorApp</mainClass>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 </project>
