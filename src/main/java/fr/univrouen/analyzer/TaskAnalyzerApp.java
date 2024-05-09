@@ -35,6 +35,7 @@ public class TaskAnalyzerApp {
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
+            System.out.println("Analyseur");
             System.out.println("Menu:");
             System.out.println("1. Charger une liste de tâches à partir d'un fichier");
             System.out.println("2. Afficher les 5 premières tâches incomplètes");

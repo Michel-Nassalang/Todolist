@@ -22,10 +22,10 @@ public class TaskAnalyzerDialog {
     /**
      * Crée une boîte de dialogue pour afficher les tâches incomplètes.
      *
-     * @param incompleteTasks la liste des tâches incomplètes à afficher dans la boîte de dialogue.
+     * @param tasks la liste des tâches incomplètes à afficher dans la boîte de dialogue.
      * @return le dialogue créé pour afficher les tâches incomplètes.
      */
-    public static Dialog<Void> createTasksDialog(List<TaskComponent> incompleteTasks) {
+    public static Dialog<Void> createTasksDialog(List<TaskComponent> tasks) {
         // Créer un TreeTableView pour afficher les tâches incomplètes
         TreeTableView<TaskComponent> treeTableView = new TreeTableView<>();
         TreeItem<TaskComponent> root = new TreeItem<>();
@@ -63,7 +63,7 @@ public class TaskAnalyzerDialog {
         progressColumn.setPrefWidth(100);
 
         // Ajouter les tâches incomplètes à la racine du TreeTableView
-        incompleteTasks.forEach(task -> root.getChildren().add(new TreeItem<>(task)));
+        tasks.forEach(task -> root.getChildren().add(new TreeItem<>(task)));
 
         // Créer une VBox pour contenir le TreeTableView
         VBox rootPane = new VBox(treeTableView);

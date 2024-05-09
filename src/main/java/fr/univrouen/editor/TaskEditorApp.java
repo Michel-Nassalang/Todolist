@@ -29,7 +29,7 @@ public class TaskEditorApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        stage.setTitle("Todolist");
+        stage.setTitle("Editeur");
 
         // Création des boutons
         Button editButton = new Button("Editeur");
